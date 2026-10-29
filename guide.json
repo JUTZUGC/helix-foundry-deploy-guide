@@ -1,0 +1,109 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "helixfoundry",
+    "nameCn": "Helix Foundry",
+    "repoName": "helix-foundry-deploy-guide",
+    "oneLiner": "连接公司数据，让 Agent 起草本体，再载入 HelixDB 变成可浏览、可提问的图",
+    "officialRepo": "https://github.com/HelixDB/helix-foundry",
+    "officialDocs": "https://github.com/HelixDB/helix-foundry#readme",
+    "stars": "1.8k",
+    "license": "Apache-2.0",
+    "highlights": [
+      "一条命令起全栈：站点、应用、图数据库一起跑",
+      "自带示例：Acme Corp 的数据库与文档，一分钟走完",
+      "本体起草：Agent 根据数据生成结构，不用手画",
+      "双向浏览：图谱视图与记录视图随时切换",
+      "引用问答：答案能追到原始行或原文",
+      "模型可选：Claude、OpenAI、Ollama、LM Studio 等"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供部署步骤、端口与常见问题。",
+    "webuiUrl": "http://127.0.0.1:3000",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-29",
+    "verification": [
+      [
+        "README 确认 Docker Compose、端口 3000、无登录与示例数据",
+        "已核对 2026-10-29"
+      ],
+      [
+        "README 确认模型回退顺序与 ollama profile",
+        "已核对 2026-10-29"
+      ],
+      [
+        "未实测 docker compose 构建与启动",
+        "说明 2026-10-29"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-10-29"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-29"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "steps": [
+        "git clone https://github.com/HelixDB/helix-foundry.git",
+        "cd helix-foundry",
+        "docker compose up -d --wait",
+        "echo \"已启动：http://127.0.0.1:3000\""
+      ],
+      "stepsPs": [
+        "git clone https://github.com/HelixDB/helix-foundry.git",
+        "Set-Location helix-foundry",
+        "docker compose up -d --wait",
+        "Write-Host \"已启动：http://127.0.0.1:3000\""
+      ],
+      "source": "https://github.com/HelixDB/helix-foundry#readme"
+    },
+    "pitfalls": [
+      "docker compose 不可用：升级 Docker Desktop，确认 v2 子命令",
+      "端口 3000 被占：先停占用进程，或改 compose 端口映射",
+      "启动后页面空白：等 --wait 结束，再看 docker compose logs",
+      "没有模型可用：配 ANTHROPIC_API_KEY / OPENAI_API_KEY，或起 ollama profile",
+      "重启后数据没了：确认没有执行 down -v",
+      "连不上本机数据库：容器里的 localhost 不是宿主机，用 host.docker.internal",
+      "公网暴露风险：默认无鉴权，先加反向代理与访问控制"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/helix-foundry-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/helix-foundry-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Helix Foundry",
+    "HelixDB 部署",
+    "数据本体 自动生成",
+    "图数据库 问答",
+    "Agent 数据建模",
+    "helix-foundry 教程",
+    "Helix Foundry 自托管",
+    "Docker 图数据库",
+    "helix foundry deploy guide",
+    "知识图谱 自动构建"
+  ],
+  "topics": [
+    "knowledge-graph",
+    "graph-database",
+    "ontology",
+    "docker",
+    "ai-agents",
+    "helix-foundry"
+  ]
+}
